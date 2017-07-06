@@ -36,9 +36,7 @@ class Dropout(function.Function):
 
 
 def dropout(x, ratio=.5, **kwargs):
-    """dropout(x, ratio=.5)
-
-    Drops elements of input variable randomly.
+    """Drops elements of input variable randomly.
 
     This function drops input elements randomly with probability ``ratio`` and
     scales the remaining elements by factor ``1 / (1 - ratio)``. In testing
@@ -51,14 +49,24 @@ def dropout(x, ratio=.5, **kwargs):
        See :func:`chainer.using_config`.
 
     Args:
-        x (~chainer.Variable): Input variable.
-        ratio (float): Dropout ratio.
+        x (:class:`~chainer.Variable` or :class:`numpy.ndarray` or \
+        :class:`cupy.ndarray`):
+            Input variable.
+        ratio (float): Dropout ratio. It should be ``(0, 1]``.
 
     Returns:
         ~chainer.Variable: Output variable.
 
     See the paper by G. Hinton: `Improving neural networks by preventing \
     co-adaptation of feature detectors <https://arxiv.org/abs/1207.0580>`_.
+
+    .. admonition:: Example
+
+        >>> x = np.array([-2.6, -1, 0, 1, 2.6])
+        >>> x
+        array([-2.6, -1. ,  0. ,  1. ,  2.6])
+        >>> F.hard_sigmoid(x).data
+        array([ 0. ,  0.3,  0.5,  0.7,  1. ])
 
     """
     argument.check_unexpected_kwargs(
