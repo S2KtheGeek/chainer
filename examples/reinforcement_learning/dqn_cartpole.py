@@ -24,6 +24,9 @@ class QFunction(chainer.Chain):
     """Q-function represented by a MLP."""
 
     def __init__(self, obs_size, n_actions, n_units=100):
+        """Constructor which defines the size of input, output and hidden
+        vectors. Each layer is represented by :class:`~chainer.links.Linear`.
+        """
         super(QFunction, self).__init__()
         with self.init_scope():
             self.l0 = L.Linear(obs_size, n_units)
